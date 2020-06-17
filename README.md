@@ -6,17 +6,18 @@ Web application for writing `.rule.xalgo` files in tabular format.
 
 1. **React** - Frontend/UI framework
 1. **Express** - Backend framework
-1. **Sequelize** - Database connection and ORM
+1. **PostgreSQL** - Sequelize for Heroku Postgres connection and ORM
+1. **MongoDB** - MongoDB Atlas service
 1. **Heroku** - Deployment
+1. **Evergreen** - React component library
 
 ### Usage
-
-Use the template to start a new repository, deploy the application via _Heroku_, and add the _Heroku Postgres_ addon. Once this is done, you can copy the `DATABASE_URL` environment variable from your _Heroku_ env-vars to a local `.env` file.
 
 **The following must be added to the .env file for your development environment to work:**
 
 ```
 DATABASE_URL=<Postgres database URL>
+MONGODB_URL=<MongoDB Atlas URL>
 DEVELOPMENT=True
 ```
 
