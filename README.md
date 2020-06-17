@@ -1,6 +1,6 @@
-# React-Express-Heroku Template
+# Xalgo RM
 
-Simple template for quickly spinning up a frontend and backend on Heroku. Utilizes **Sequelize** for Heroku Postgres interaction.
+Web application for writing `.rule.xalgo` files in tabular format.
 
 ### Stack
 
