@@ -15,50 +15,32 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true,
 });
 
-const data = [
-  {
-    meta: {
-      date: "today",
-      country: "CA",
-      name: "GST",
-    },
-  },
-  {
-    meta: {
-      date: "tomorrow",
-      country: "CA",
-      name: "Carbon Tax",
-    },
-  },
-];
+/* Test service when app is started */
 
-/*
-client.connect((err, client) => {
-  if (err) throw err;
-  // Connection succeeded.
-  console.log("[SUCCESS] Connected to MongoDB");
-  const dbo = client.db("test-db");
-  dbo.collection("up-test").insertMany(data, (err, res) => {
-    if (err) throw err;
-    // Attempt to insert data into up-test collection.
-    dbo
-      .collection("up-test")
-      .find()
-      .toArray((err, results) => {
-        if (err) throw err;
-        console.log(results);
-      });
-  });
-});
-*/
+const now = new Date();
+const verifyWithString = `TIME${now.getHours()}${now.getMinutes()}${now.getSeconds()}`;
 
 client.connect((err, client) => {
   if (err) throw err;
   const dbo = client.db("test-db");
   const col = dbo.collection("up-test");
-  col.find().toArray((err, results) => {
+
+  console.log("[TEST] MongoDB: Inserting document...");
+  console.log(` -> { storedString: ${verifyWithString} }`);
+  col.insert({ verNum: 5, storedString: verifyWithString }, (err, result) => {
     if (err) throw err;
-    console.log(results);
+    console.log("[TEST] MongoDB: Retrieving document...");
+    col.find({ verNum: 5 }).toArray((err, results) => {
+      if (err) throw err;
+      console.log(results);
+      console.log("[TEST] MongoDB: Deleting document...");
+      col.deleteMany({ verNum: 5 }, (err, res) => {
+        if (err) throw err;
+        console.log(` -> Deleted ${res.deletedCount}`);
+        console.log("[SUCCESS] MongoDB ready for use.");
+        client.close();
+      });
+    });
   });
 });
 
