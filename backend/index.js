@@ -11,7 +11,8 @@ import helmet from "helmet";
 import bodyParser from "body-parser";
 import path from "path";
 import dotenv from "dotenv";
-import { User } from "./database.js";
+import { User } from "./db-postgres.js";
+import { client } from "./db-mongo.js";
 
 // Load .env file into environment variables
 dotenv.config();

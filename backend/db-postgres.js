@@ -4,6 +4,7 @@ dotenv.config();
 const dev = process.env.DEVELOPMENT === "True" ? true : false;
 
 /* Connect and authenticate */
+console.log("Connecting to Heroku Postgres...");
 
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: "postgresql",
@@ -36,4 +37,4 @@ if (dev) {
 }
 
 // Export models for use.
-export { User };
+export { User, sequelize };
