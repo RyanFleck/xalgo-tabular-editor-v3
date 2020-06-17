@@ -8,14 +8,8 @@ import {
   HomeOutlined,
   EyeOutlined,
 } from "@ant-design/icons";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useHistory,
-  NavLink,
-} from "react-router-dom";
+
+import { Router, Link } from "@reach/router";
 import axios from "axios";
 import axiosRetry from "axios-retry";
 
@@ -65,19 +59,24 @@ export default class Home extends React.Component {
             <Menu
               defaultSelectedKeys={["1"]}
               defaultOpenKeys={["sub1"]}
+              //selectedKeys={[this.props.location.pathname]}
               mode="inline"
             >
-              <Menu.Item key="1" icon={<HomeOutlined />}>
-                <NavLink to="/">Home</NavLink>
+              <Menu.Item key="/" icon={<HomeOutlined />}>
+                <Text>Home</Text>
+                <Link to="/" />
               </Menu.Item>
-              <Menu.Item key="2" icon={<UserOutlined />}>
-                <NavLink to="/account">Your Account</NavLink>
+              <Menu.Item key="/account" icon={<UserOutlined />}>
+                <Text>Your Account</Text>
+                <Link to="/account" />
               </Menu.Item>
-              <Menu.Item key="3" icon={<EditOutlined />}>
-                <NavLink to="/editor">Rule Editor</NavLink>
+              <Menu.Item key="/editor" icon={<EditOutlined />}>
+                <Text>Rule Editor</Text>
+                <Link to="/editor" />
               </Menu.Item>
-              <Menu.Item key="4" icon={<PieChartOutlined />}>
-                <NavLink to="/explorer">Rule Editor</NavLink>
+              <Menu.Item key="/explorer" icon={<PieChartOutlined />}>
+                <Text>Rule Explorer</Text>
+                <Link to="/explorer" />
               </Menu.Item>
               <SubMenu key="sub1" icon={<EyeOutlined />} title="View Sections">
                 <Menu.Item key="5">Editing Form</Menu.Item>
@@ -94,20 +93,10 @@ export default class Home extends React.Component {
                 ))}
               </Breadcrumb>
               <Router>
-                <Switch>
-                  <Layout>
-                    <Route path="/">
-                      <Header>Home</Header>
-                      <Row>
-                        <Col span={this.state.columnSpan}>{infoCard()}</Col>
-                        <Col span={this.state.columnSpan}>{infoCard()}</Col>
-                      </Row>
-                    </Route>
-                    <Route path="/editor"></Route>
-                    <Route path="/explorer"></Route>
-                    <Route path="/account"></Route>
-                  </Layout>
-                </Switch>
+                <Landing path="/" />
+                <Editor path="/editor" />
+                <Explorer path="/explorer" />
+                <Account path="/account" />
               </Router>
             </Content>
             <Footer style={{ textAlign: "center" }}>
@@ -118,6 +107,39 @@ export default class Home extends React.Component {
       </div>
     );
   }
+}
+
+function Landing() {
+  return (
+    <Layout>
+      <Title>Home</Title>
+    </Layout>
+  );
+}
+function Account() {
+  return (
+    <Layout>
+      <Title>Account</Title>
+    </Layout>
+  );
+}
+function Editor() {
+  return (
+    <Layout>
+      <Title>Editor</Title>
+      <Row>
+        <Col span={12}>{infoCard()}</Col>
+        <Col span={12}>{infoCard()}</Col>
+      </Row>
+    </Layout>
+  );
+}
+function Explorer() {
+  return (
+    <Layout>
+      <Title>Explorer</Title>
+    </Layout>
+  );
 }
 
 function infoCard() {
