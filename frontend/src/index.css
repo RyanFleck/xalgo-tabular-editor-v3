@@ -1,5 +1,9 @@
+@import "~antd/dist/antd.css";
+
+html,
 body {
   margin: 0;
+  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -7,11 +11,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-#app-wrap {
-  padding: 1em;
+#components-layout-demo-side .logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.site-layout .site-layout-background {
+  background: #fff;
 }
