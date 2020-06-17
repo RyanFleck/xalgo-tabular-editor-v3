@@ -1,18 +1,28 @@
 import React from "react";
 import { Layout, Menu, Breadcrumb, Typography, Row, Col } from "antd";
 import {
-  DesktopOutlined,
   PieChartOutlined,
-  GlobalOutlined,
   EditOutlined,
-  FileOutlined,
-  TeamOutlined,
   UserOutlined,
+  FileOutlined,
+  HomeOutlined,
+  EyeOutlined,
 } from "@ant-design/icons";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useHistory,
+  NavLink,
+} from "react-router-dom";
 import axios from "axios";
 import axiosRetry from "axios-retry";
 
+// Axios Config
 axiosRetry(axios, { retryDelay: axiosRetry.exponentialDelay });
+
+// Component Library Config
 const { Header, Content, Footer, Sider } = Layout;
 const { Title, Paragraph, Text } = Typography;
 const { SubMenu } = Menu;
@@ -22,7 +32,7 @@ export default class Home extends React.Component {
     super(props);
     this.state = {
       sidebarCollapsed: false,
-      columnSpan: 8,
+      columnSpan: 12,
       path: ["Rule Editor", "test.rule"],
     };
 
@@ -43,50 +53,69 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <Layout style={{ minHeight: "100vh" }}>
-        <Sider
-          collapsible
-          collapsed={this.state.sidebarCollapsed}
-          onCollapse={this.collapse}
-          theme="light"
-        >
-          <div className="logo" />
-          <Menu
-            defaultSelectedKeys={["1"]}
-            defaultOpenKeys={["sub1"]}
-            mode="inline"
+      <div>
+        <Layout style={{ minHeight: "100vh" }}>
+          <Sider
+            collapsible
+            collapsed={this.state.sidebarCollapsed}
+            onCollapse={this.collapse}
+            theme="light"
           >
-            <Menu.Item key="1" icon={<EditOutlined />}>
-              Rule Editor
-            </Menu.Item>
-            <Menu.Item key="2" icon={<PieChartOutlined />}>
-              Rule Explorer
-            </Menu.Item>
-            <SubMenu key="sub1" icon={<UserOutlined />} title="View Sections">
-              <Menu.Item key="3">Editing Form</Menu.Item>
-              <Menu.Item key="4">Property</Menu.Item>
-              <Menu.Item key="5">Testing</Menu.Item>
-            </SubMenu>
-          </Menu>
-        </Sider>
-        <Layout className="site-layout">
-          <Content style={{ margin: "0 16px" }}>
-            <Breadcrumb style={{ margin: "16px 0" }}>
-              {this.state.path.map((x) => (
-                <Breadcrumb.Item>{x}</Breadcrumb.Item>
-              ))}
-            </Breadcrumb>
-            <Row>
-              <Col span={this.state.columnSpan}>{infoCard()}</Col>
-              <Col span={this.state.columnSpan}>{infoCard()}</Col>
-              <Col span={this.state.columnSpan}>{infoCard()}</Col>
-            </Row>
-          </Content>
-          <Footer style={{ textAlign: "center" }}>
-            Ant Design ©2018 Created by Ant UED
-          </Footer>
+            <div className="logo" />
+            <Menu
+              defaultSelectedKeys={["1"]}
+              defaultOpenKeys={["sub1"]}
+              mode="inline"
+            >
+              <Menu.Item key="1" icon={<HomeOutlined />}>
+                <NavLink to="/">Home</NavLink>
+              </Menu.Item>
+              <Menu.Item key="2" icon={<UserOutlined />}>
+                <NavLink to="/account">Your Account</NavLink>
+              </Menu.Item>
+              <Menu.Item key="3" icon={<EditOutlined />}>
+                <NavLink to="/editor">Rule Editor</NavLink>
+              </Menu.Item>
+              <Menu.Item key="4" icon={<PieChartOutlined />}>
+                <NavLink to="/explorer">Rule Editor</NavLink>
+              </Menu.Item>
+              <SubMenu key="sub1" icon={<EyeOutlined />} title="View Sections">
+                <Menu.Item key="5">Editing Form</Menu.Item>
+                <Menu.Item key="6">Property</Menu.Item>
+                <Menu.Item key="7">Testing</Menu.Item>
+              </SubMenu>
+            </Menu>
+          </Sider>
+          <Layout className="site-layout">
+            <Content style={{ margin: "0 16px" }}>
+              <Breadcrumb style={{ margin: "16px 0" }}>
+                {this.state.path.map((x, key) => (
+                  <Breadcrumb.Item key={key}>{x}</Breadcrumb.Item>
+                ))}
+              </Breadcrumb>
+              <Router>
+                <Switch>
+                  <Layout>
+                    <Route path="/">
+                      <Header>Home</Header>
+                      <Row>
+                        <Col span={this.state.columnSpan}>{infoCard()}</Col>
+                        <Col span={this.state.columnSpan}>{infoCard()}</Col>
+                      </Row>
+                    </Route>
+                    <Route path="/editor"></Route>
+                    <Route path="/explorer"></Route>
+                    <Route path="/account"></Route>
+                  </Layout>
+                </Switch>
+              </Router>
+            </Content>
+            <Footer style={{ textAlign: "center" }}>
+              Ant Design ©2018 Created by Ant UED
+            </Footer>
+          </Layout>
         </Layout>
-      </Layout>
+      </div>
     );
   }
 }
