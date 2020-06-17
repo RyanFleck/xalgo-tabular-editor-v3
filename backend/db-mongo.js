@@ -26,22 +26,25 @@ client.connect((err, client) => {
   const col = dbo.collection("up-test");
 
   console.log("[TEST] MongoDB: Inserting document...");
-  console.log(` -> { storedString: ${verifyWithString} }`);
-  col.insert({ verNum: 5, storedString: verifyWithString }, (err, result) => {
-    if (err) throw err;
-    console.log("[TEST] MongoDB: Retrieving document...");
-    col.find({ verNum: 5 }).toArray((err, results) => {
+  console.log(` -> { verNum: 5, storedString: ${verifyWithString} }`);
+  col.insertOne(
+    { verNum: 5, storedString: verifyWithString },
+    (err, result) => {
       if (err) throw err;
-      console.log(results);
-      console.log("[TEST] MongoDB: Deleting document...");
-      col.deleteMany({ verNum: 5 }, (err, res) => {
+      console.log("[TEST] MongoDB: Retrieving document...");
+      col.find({ verNum: 5 }).toArray((err, results) => {
         if (err) throw err;
-        console.log(` -> Deleted ${res.deletedCount}`);
-        console.log("[SUCCESS] MongoDB ready for use.");
-        client.close();
+        console.log(results);
+        console.log("[TEST] MongoDB: Deleting document...");
+        col.deleteMany({ verNum: 5 }, (err, res) => {
+          if (err) throw err;
+          console.log(` -> Deleted ${res.deletedCount}`);
+          console.log("[SUCCESS] MongoDB ready for use.");
+          client.close();
+        });
       });
-    });
-  });
+    }
+  );
 });
 
 export { client };
