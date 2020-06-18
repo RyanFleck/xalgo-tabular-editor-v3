@@ -25,3 +25,7 @@ body {
 .site-layout .site-layout-background {
   background: #fff;
 }
+
+.mainLayout {
+  height: calc(100vh-64px);
+}
