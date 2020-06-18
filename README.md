@@ -1,4 +1,4 @@
-# Xalgo RM
+# Xalgo Tabular Editor
 
 Web application for writing `.rule.xalgo` files in tabular format.
 
