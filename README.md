@@ -28,3 +28,10 @@ yarn install                 #Do this in root and frontend folder before beginni
 yarn develop                 #Starts Express backend.
 cd frontend && yarn start    #Starts react app.
 ```
+
+### Resources
+
+1. [Ant Design component guide](https://ant.design/components/overview/)
+1. [Reach Router docs](https://reach.tech/router)
+1. [MongoDB Atlas](https://cloud.mongodb.com)
+1. [Heroku Dashboard](https://dashboard.heroku.com/apps/xalgo-editor-v3)

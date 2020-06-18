@@ -28,6 +28,20 @@ export default class Home extends React.Component {
       sidebarCollapsed: false,
       columnSpan: 12,
       path: ["Rule Editor", "test.rule"],
+      pages: {
+        home: {
+          route: "/home",
+        },
+        editor: {
+          route: "/editor",
+        },
+        explorer: {
+          route: "/explorer",
+        },
+        account: {
+          route: "/account",
+        },
+      },
     };
 
     this.collapse = this.collapse.bind(this);
