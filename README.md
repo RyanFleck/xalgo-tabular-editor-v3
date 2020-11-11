@@ -1,3 +1,8 @@
+**Archived,** see <https://github.com/RyanFleck/Xalgo-System-Prototype> for the latest prototype.
+
+<br />
+
+
 # Xalgo Tabular Editor
 
 Web application for writing `.rule.xalgo` files in tabular format.
